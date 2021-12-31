@@ -1,6 +1,6 @@
 import axios from 'axios'
+import messagesService from '../service/message'
 
-const mes_url = 'http://127.0.0.1:8080/api/messages/getMessages'
 
 const taskReducer = (state = [], action) => {
     switch(action.type) {
@@ -16,7 +16,7 @@ const taskReducer = (state = [], action) => {
 
 export const initializeMessages = (groupid) => {
     return async dispatch  => {
-        const messages = await axios.get(mes_url, { groupId: groupid })
+        const messages = await messagesService.getMessages(groupid)
         dispatch({ 
             type: 'INIT_DATA', 
             data: messages,
