@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from 'react';
-// import { socket } from './service/socket';
-import Login from './SignIn'
+import { Link } from 'react-router-dom'
 
 const Home = () =>  {
-  const [user, setUser] = useState(null)
-  const [groups, setGroups] = useState([])
-
-  useEffect(() => {
-    const loggedInUser = window.localStorage.getItem('loggedinUser')
-    if (loggedInUser) {
-      const userInfo = JSON.parse(loggedInUser)
-      setUser(userInfo)
-      setGroups(userInfo.groups)
-    }
-  }, [])
-
   return (
     <div>
-        <h1>User: {user.username}</h1>
-      <ul>
-          {groups.map((group) => {
-            return (
-              <li key={group.id}>
-                <button>{group.name}</button>
-              </li>
-            )
-          })}
-      </ul>
-      <Login />
+      <h1>FullStack Chat App</h1>
+      <Link to="/signup">
+        <button>Signup</button>
+      </Link>
+      <Link to="/signin">
+        <button>Login</button>
+      </Link>
+      <Link to="/chat">
+        <button>Chat</button>
+      </Link>
     </div>
   )
 }
