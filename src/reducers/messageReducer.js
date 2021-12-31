@@ -3,7 +3,6 @@ import axios from 'axios'
 const mes_url = 'http://127.0.0.1:8080/api/messages/getMessages'
 
 const taskReducer = (state = [], action) => {
-    console.log('ACTION', action)
     switch(action.type) {
         case 'NEW_MESSAGE': 
             return [...state, action.data]
