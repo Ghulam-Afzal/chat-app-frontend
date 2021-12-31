@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
-
-
-const signup_url = 'http://127.0.0.1:8080/api/auth/signup'
+import authService from '../service/auth'
 
 const SignUp = () => {
     const [username, setUsername] = useState('')
@@ -35,7 +32,7 @@ const SignUp = () => {
                 username: username, 
                 password: password
             }
-           const user = await axios.post(signup_url, obj)
+           const user = await authService.signup(obj)
            console.log(user)
         } catch (err) {
           console.log(err);

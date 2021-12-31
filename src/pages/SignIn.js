@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import axios from 'axios'
-
-const signin_url = 'http://127.0.0.1:8080/api/auth/signin'
+import React, { useState } from "react"
+import authService from '../service/auth'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -16,7 +14,7 @@ const Login = () => {
                 username: username, 
                 password: password
             }
-            const user = await axios.post(signin_url, obj)
+            const user = await authService.login(obj)
             window.localStorage.setItem("loggedinUser", JSON.stringify(user.data))
         } catch (error){
             console.log(error)

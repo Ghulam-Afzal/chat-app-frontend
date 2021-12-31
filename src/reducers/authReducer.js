@@ -1,6 +1,5 @@
-import axios from "axios"
+import authService from '../service/auth'
 
-const u_url = 'http://127.0.0.1:8080/api/auth/getUser'
 
 const userReducer = (state = [], action) => {
     switch(action.type) {
@@ -13,11 +12,10 @@ const userReducer = (state = [], action) => {
 
 export const initializeUser = () => {
     return async dispatch => {
-        const user = await axios.post(u_url, {userId: 5})
-        console.log(user.data)
+        const user = await authService.getUserInfo(5)
         dispatch({
             type: "INIT_USER", 
-            data: user.data.groups,
+            data: user.groups,
         })
     }
 }
