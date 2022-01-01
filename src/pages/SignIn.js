@@ -15,7 +15,8 @@ const Login = () => {
                 password: password
             }
             const user = await authService.login(obj)
-            window.localStorage.setItem("loggedinUser", JSON.stringify(user.data))
+            console.log(user)
+            window.localStorage.setItem("loggedinUser", JSON.stringify(user))
         } catch (error){
             console.log(error)
         }
