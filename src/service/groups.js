@@ -16,10 +16,16 @@ const joinGroup = async info => {
     return response.data
 }
 
+const leaveGroup = async info => {
+    const response =  await axios.put(config.g_leave_url, info)
+    return response.data
+}
+
 const groupService = {
     getGroups, 
     createGroup, 
-    joinGroup
+    joinGroup,
+    leaveGroup
 }
 
 export default groupService
