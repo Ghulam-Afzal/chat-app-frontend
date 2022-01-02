@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "./service.config";
 
 const getUserInfo = async userId => {
-    const response = await axios.post(config.user_url, {userId: 5})
+    const response = await axios.post(config.user_url, {userId: userId})
     return response.data
 }
 
