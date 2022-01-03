@@ -13,10 +13,20 @@ const taskReducer = (state = [], action) => {
     }
 }
 
+export const newMessage = (message) => {
+    return dispatch => {
+        dispatch({
+            type: "NEW_MESSAGE",
+            data: message
+        })
+    }
+}
+
 
 export const initializeMessages = (groupid) => {
     return async dispatch  => {
         const messages = await messagesService.getMessages(groupid)
+        console.log(messages)
         dispatch({ 
             type: 'INIT_DATA', 
             data: messages,
