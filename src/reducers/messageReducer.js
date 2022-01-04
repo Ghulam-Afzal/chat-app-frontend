@@ -7,6 +7,8 @@ const taskReducer = (state = [], action) => {
     switch(action.type) {
         case 'NEW_MESSAGE': 
             return [...state, action.data]
+        case "SOCKET_NEW_MESSAGE": 
+            return [...state, action.data]
         case "INIT_DATA": 
             return action.data
         default: 
@@ -31,6 +33,14 @@ export const newMessage = (author, message, group) => {
     }
 }
 
+export const socketNewMessage = (msgObj) => {
+    return dispatch => {
+        dispatch ({
+            type: "SOCKET_NEW_MESSAGE", 
+            data: msgObj
+        })
+    }
+}
 
 export const initializeMessages = (groupid) => {
     return async dispatch  => {
