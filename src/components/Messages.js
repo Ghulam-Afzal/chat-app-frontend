@@ -7,7 +7,7 @@ const Message = ({ messages }) => {
     const scrollToBottom = () => {
         messagesRef.current?.scrollIntoView({ behavior: "smooth" })
     }
-
+    
     useEffect(() => {
         scrollToBottom()
     }, [messages])
