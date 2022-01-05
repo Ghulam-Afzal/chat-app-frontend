@@ -46,12 +46,8 @@ const Chat = () => {
     }
 
     const getGroupMessages = (groupId) => {
-        if (curGroup !== groupId){
-            socket.emit("leave-room", groupId)
-        }
         dispatch(initializeMessages(groupId))
         setCurGroup(groupId)
-        socket.emit('join-room', groupId)
     }
 
     const handleSubmit = (event) => {
