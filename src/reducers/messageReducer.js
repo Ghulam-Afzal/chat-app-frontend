@@ -24,7 +24,6 @@ export const newMessage = (author, message, group) => {
     }
     return async dispatch => {
         const message = await axios.post(config.new_mes_url, payload)
-        console.log(message.data)
         socket.emit("message-send", message.data)
         dispatch({
             type: "NEW_MESSAGE",
@@ -45,7 +44,6 @@ export const socketNewMessage = (msgObj) => {
 export const initializeMessages = (groupid) => {
     return async dispatch  => {
         const messages = await messagesService.getMessages(groupid)
-        console.log(messages)
         dispatch({ 
             type: 'INIT_DATA', 
             data: messages,
