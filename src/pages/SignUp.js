@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import authService from '../service/auth'
+import { Redirect } from 'react-router-dom'
 
 const SignUp = () => {
     const [username, setUsername] = useState('')
@@ -7,6 +8,7 @@ const SignUp = () => {
     const [password2, setPassword2] = useState('')
     const [showError, setShowError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [redirect, setRedirect] = useState(false);
 
     const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
 
@@ -33,14 +35,14 @@ const SignUp = () => {
                 password: password
             }
            const user = await authService.signup(obj)
-           console.log(user)
+           setRedirect(true)
         } catch (err) {
           console.log(err);
         }
       };
 
-
-    return (
+    const form = () => {
+      return (
         <div>
             <div style={showError ? {color:'red'} : {display:'none'}}>{errorMessage}</div>
             <form onSubmit={handleSubmit}>
@@ -53,6 +55,9 @@ const SignUp = () => {
             </form>
         </div>
     )
+    }
+
+    return  <div>{redirect === false ? form() : <Redirect to="/" />}</div>;
 }
 
 export default SignUp
