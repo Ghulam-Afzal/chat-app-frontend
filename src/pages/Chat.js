@@ -5,6 +5,7 @@ import { initializeMessages, newMessage, socketNewMessage } from "../reducers/me
 import { socket } from "../service/socket"
 import "../App.css"
 import Message from "../components/Messages"
+import GroupPanel from "../components/GroupPanel"
 
 const Chat = () => {
     const messages = useSelector(state => state.messages)
@@ -62,22 +63,7 @@ const Chat = () => {
     }
     return (
       <div className="contianer">
-          <div className="left">
-            <h1>User: {user}</h1>
-            <h3>Groups</h3>
-            <ul>
-                {userInfo.map((group) => {
-                    return (
-                        <li key={group.id}>
-                            <button onClick={() => getGroupMessages(group.id)}>{group.name}</button>
-                        </li>
-                    )
-                })}
-            </ul>
-            <button onClick={handleCreate}>Create Group</button>
-            <button onClick={handleJoin}>Join Group</button>
-            <button onClick={handleLeave}>Leave Group</button>
-          </div>
+          <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
           <div className="right">
             <Message messages={messages} />
             <form className="input-from" onClick={handleSubmit}>
