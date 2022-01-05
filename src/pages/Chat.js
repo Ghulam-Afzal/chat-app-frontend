@@ -22,10 +22,9 @@ const Chat = () => {
         userId = loggedInUser.id
     }
 
-    socket.on("s-message", (message) => {
+    socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
-            // dispatch(socketNewMessage(message))
-            console.log(message)
+            dispatch(socketNewMessage(message))
         }
     })
 
@@ -38,7 +37,7 @@ const Chat = () => {
     }
 
     const handleJoin = () => {
-        dispatch(joinGroup(3, "5ef7e1f4-a1e5-4600-bc8a-b6f7546660be"))
+        dispatch(joinGroup(6, "5ef7e1f4-a1e5-4600-bc8a-b6f7546660be"))
     }
 
     const handleLeave = () => {
