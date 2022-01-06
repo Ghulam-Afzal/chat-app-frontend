@@ -22,7 +22,6 @@ const Chat = () => {
         user = loggedInUser.username
         userId = loggedInUser.id
     }
-
     socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
             dispatch(socketNewMessage(message))
@@ -52,9 +51,11 @@ const Chat = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (msg.length !== 0){
-            dispatch(newMessage(userId, msg, 1))
-            setMessage("")
+            if(curGroup){
+                if (msg.length !== 0){
+                    dispatch(newMessage(userId, msg, curGroup))
+                    setMessage("")
+                }
         }
     }
     return (
