@@ -6,14 +6,20 @@ import { socket } from "../service/socket"
 import "../App.css"
 import Message from "../components/Messages"
 import GroupPanel from "../components/GroupPanel"
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
+import CreateGroupModel from "../components/CreateGroupModel"
+
 
 const Chat = () => {
     const messages = useSelector(state => state.messages)
     const userInfo = useSelector(state => state.user)
     const [curGroup, setCurGroup] = useState()
     const [msg, setMessage] = useState("")
+    const [show, setShow] = useState(false)
+    const [groupName, setGroupName] = useState('')
     const dispatch = useDispatch()
-    
+    console.log(userInfo)
     let user; 
     let userId; 
     const data = window.localStorage.getItem("loggedinUser")
@@ -32,8 +38,12 @@ const Chat = () => {
         dispatch(initializeUser(userId))
     }, [dispatch])
     
-    const handleCreate = () => {
-        dispatch(createGroup("bob", "usergROUSPDTETST", 2))
+    const handleCreate = (event) => {
+        event.preventDefault()
+        if (groupName.length > 0){
+            dispatch(createGroup(user, groupName, userId))
+            setGroupName("")
+        }
     }
 
     const handleJoin = () => {
@@ -58,8 +68,19 @@ const Chat = () => {
                 }
         }
     }
+
+    const handleClose = () => {
+        setShow(false)
+    }
+
     return (
       <div className="contianer">
+          <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
+          {/* <form onSubmit={handleCreate}> 
+                Group Name: <input value={groupName} onChange={(e) => setGroupName(e.target.value)}/>
+                <button type="submit" >Submit</button>
+            </form> */}
+          <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
           <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
           <div className="right">
             <Message messages={messages} />
