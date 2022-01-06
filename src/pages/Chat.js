@@ -6,6 +6,7 @@ import { socket } from "../service/socket"
 import "../App.css"
 import Message from "../components/Messages"
 import GroupPanel from "../components/GroupPanel"
+import LeaveGroup from "../components/LeaveGroup"
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import CreateGroupModel from "../components/CreateGroupModel"
@@ -50,8 +51,8 @@ const Chat = () => {
         dispatch(joinGroup(6, "5ef7e1f4-a1e5-4600-bc8a-b6f7546660be"))
     }
 
-    const handleLeave = () => {
-        dispatch(leaveGroup(2, "7e8e4102-025f-40af-8f94-4615789e2800"))
+    const handleLeave = (groupId) => {
+        dispatch(leaveGroup(userId, groupId))
     }
 
     const getGroupMessages = (groupId) => {
@@ -76,15 +77,12 @@ const Chat = () => {
     return (
       <div className="contianer">
           <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
-          {/* <form onSubmit={handleCreate}> 
-                Group Name: <input value={groupName} onChange={(e) => setGroupName(e.target.value)}/>
-                <button type="submit" >Submit</button>
-            </form> */}
+          <LeaveGroup groups={userInfo} leaveGroup={handleLeave} />
           <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
           <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
           <div className="right">
             <Message messages={messages} />
-            <form className="input-from" onClick={handleSubmit}>
+            <form className="input-from" onClick={handleLeave}>
                 <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
                 <button type="submit">Send</button>
             </form>
