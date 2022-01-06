@@ -6,21 +6,25 @@ import { socket } from "../service/socket"
 import "../App.css"
 import Message from "../components/Messages"
 import GroupPanel from "../components/GroupPanel"
+import JoinGroup from "../components/JoinGroup"
 import LeaveGroup from "../components/LeaveGroup"
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AiOutlineClose } from "react-icons/ai";
 import CreateGroupModel from "../components/CreateGroupModel"
+import { initializeGroups } from "../reducers/groupReducer"
 
 
 const Chat = () => {
     const messages = useSelector(state => state.messages)
     const userInfo = useSelector(state => state.user)
+    const allGroups = useSelector(state => state.groups)
     const [curGroup, setCurGroup] = useState()
     const [msg, setMessage] = useState("")
     const [show, setShow] = useState(false)
     const [groupName, setGroupName] = useState('')
     const dispatch = useDispatch()
-    console.log(userInfo)
+
+
     let user; 
     let userId; 
     const data = window.localStorage.getItem("loggedinUser")
@@ -37,6 +41,7 @@ const Chat = () => {
 
     useEffect(() => {
         dispatch(initializeUser(userId))
+        dispatch(initializeGroups())
     }, [dispatch])
     
     const handleCreate = (event) => {
@@ -47,8 +52,8 @@ const Chat = () => {
         }
     }
 
-    const handleJoin = () => {
-        dispatch(joinGroup(6, "5ef7e1f4-a1e5-4600-bc8a-b6f7546660be"))
+    const handleJoin = (groupId) => {
+        dispatch(joinGroup(userId, groupId))
     }
 
     const handleLeave = (groupId) => {
@@ -78,11 +83,12 @@ const Chat = () => {
       <div className="contianer">
           <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
           <LeaveGroup groups={userInfo} leaveGroup={handleLeave} />
+          <JoinGroup allGroups={allGroups} userGroups={userInfo} handleJoin={handleJoin}  />
           <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
           <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
           <div className="right">
             <Message messages={messages} />
-            <form className="input-from" onClick={handleLeave}>
+            <form className="input-from" onClick={handleSubmit}>
                 <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
                 <button type="submit">Send</button>
             </form>
