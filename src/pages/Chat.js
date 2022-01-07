@@ -22,17 +22,26 @@ const Chat = () => {
     const [msg, setMessage] = useState("")
     const [show, setShow] = useState(false)
     const [groupName, setGroupName] = useState('')
+    const [user, setUser] = useState()
     const dispatch = useDispatch()
 
-
-    let user; 
+ 
     let userId; 
-    const data = window.localStorage.getItem("loggedinUser")
-    if (data) {
-        const loggedInUser = JSON.parse(data)
-        user = loggedInUser.username
-        userId = loggedInUser.id
-    }
+    // const data = window.localStorage.getItem("loggedinUser")
+    // if (data) {
+    //     const loggedInUser = JSON.parse(data)
+    //     setUser(loggedInUser.username)
+    //     userId = loggedInUser.id
+    // }
+
+    useEffect(() => {
+        const loggedUserJson = window.localStorage.getItem("loggedinUser");
+        if (loggedUserJson) {
+          const loggedInUser = JSON.parse(loggedUserJson);
+          setUser(loggedInUser.username);
+          userId = loggedInUser.id
+        }
+      }, []);
     socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
             dispatch(socketNewMessage(message))
@@ -78,22 +87,41 @@ const Chat = () => {
     const handleClose = () => {
         setShow(false)
     }
+    const noUserScreen = () => {
+        return (
+            <div>No User Signed In</div>
+        )
+    }
+    
+    const logout = () => {
+        window.localStorage.removeItem("loggedinUser");
+        setUser(null)
+    }
+
+    const chat = () => {
+        return (
+            <div className="contianer">
+                <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
+                <LeaveGroup groups={userInfo} leaveGroup={handleLeave} />
+                <JoinGroup allGroups={allGroups} userGroups={userInfo} handleJoin={handleJoin}  />
+                <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
+                <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
+                <div className="right">
+                  <Message messages={messages} />
+                  <form className="input-from" onClick={handleSubmit}>
+                      <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
+                      <button type="submit">Send</button>
+                  </form>
+                  <button onClick={logout}>Logout</button>
+              </div>
+            </div>
+          )
+    }
 
     return (
-      <div className="contianer">
-          <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
-          <LeaveGroup groups={userInfo} leaveGroup={handleLeave} />
-          <JoinGroup allGroups={allGroups} userGroups={userInfo} handleJoin={handleJoin}  />
-          <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
-          <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
-          <div className="right">
-            <Message messages={messages} />
-            <form className="input-from" onClick={handleSubmit}>
-                <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
-                <button type="submit">Send</button>
-            </form>
+        <div>
+            {user === null ? noUserScreen() : chat()}
         </div>
-      </div>
     )
 }
 
