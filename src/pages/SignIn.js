@@ -27,11 +27,14 @@ const Login = () => {
 
     const form = () => {
         return (
-            <div>
+            <div className='from-contianer'>
                 <form onSubmit={login}>
-                    Username: <input className="form-input" name="username" onChange={(e) => setUsername(e.target.value)} />
-                    Password: <input className="form-input" type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-                    <button type="submit">Login</button>
+                <h3>Signin</h3>
+                    <p>Username: </p>
+                    <input className="form-input" name="username" onChange={(e) => setUsername(e.target.value)} />
+                    <p>Password: </p>
+                    <input className="form-input" type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+                    <button className='form-submit' type="submit">Login</button>
                 </form>
             </div>
         )

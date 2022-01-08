@@ -43,18 +43,22 @@ const SignUp = () => {
 
     const form = () => {
       return (
-        <div>
+        <div className='from-contianer'>
             <div style={showError ? {color:'red'} : {display:'none'}}>{errorMessage}</div>
             <form onSubmit={handleSubmit}>
+              <h3>Signup</h3>
                 <fieldset>
-                    Username: <input className="form-input" name="username" onChange={(e) => setUsername(e.target.value)} />
-                    Password: <input className="form-input" type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
-                    Re-enter Password: <input className="form-input" type="password" name="password2" onChange={(e) => setPassword2(e.target.value)} />
+                  <p>Username:</p>
+                    <input className="form-input" name="username" onChange={(e) => setUsername(e.target.value)} />
+                    <p>Password:</p>
+                    <input className="form-input" type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+                    <p>Re-enter Password:</p>
+                    <input className="form-input" type="password" name="password2" onChange={(e) => setPassword2(e.target.value)} />
                 </fieldset>
-                <button type="submit">Submit</button>
+                <button className='form-submit' type="submit">Submit</button>
             </form>
         </div>
-    )
+      )
     }
 
     return  <div>{redirect === false ? form() : <Redirect to="/" />}</div>;
