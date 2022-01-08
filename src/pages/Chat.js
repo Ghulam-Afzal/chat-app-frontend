@@ -33,15 +33,6 @@ const Chat = () => {
         userId = loggedInUser.id
     }
 
-    // useEffect(() => {
-    //     const loggedUserJson = window.localStorage.getItem("loggedinUser");
-    //     if (loggedUserJson) {
-    //       const loggedInUser = JSON.parse(loggedUserJson);
-    //       setUser(loggedInUser.username);
-    //       userId = loggedInUser.id
-    //     }
-    //   }, []);
-
       console.log(userId)
     socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
