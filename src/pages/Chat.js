@@ -22,26 +22,27 @@ const Chat = () => {
     const [msg, setMessage] = useState("")
     const [show, setShow] = useState(false)
     const [groupName, setGroupName] = useState('')
-    const [user, setUser] = useState()
     const dispatch = useDispatch()
 
- 
+    let user; 
     let userId; 
-    // const data = window.localStorage.getItem("loggedinUser")
-    // if (data) {
-    //     const loggedInUser = JSON.parse(data)
-    //     setUser(loggedInUser.username)
-    //     userId = loggedInUser.id
-    // }
+    const data = window.localStorage.getItem("loggedinUser")
+    if (data) {
+        const loggedInUser = JSON.parse(data)
+        user = (loggedInUser.username)
+        userId = loggedInUser.id
+    }
 
-    useEffect(() => {
-        const loggedUserJson = window.localStorage.getItem("loggedinUser");
-        if (loggedUserJson) {
-          const loggedInUser = JSON.parse(loggedUserJson);
-          setUser(loggedInUser.username);
-          userId = loggedInUser.id
-        }
-      }, []);
+    // useEffect(() => {
+    //     const loggedUserJson = window.localStorage.getItem("loggedinUser");
+    //     if (loggedUserJson) {
+    //       const loggedInUser = JSON.parse(loggedUserJson);
+    //       setUser(loggedInUser.username);
+    //       userId = loggedInUser.id
+    //     }
+    //   }, []);
+
+      console.log(userId)
     socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
             dispatch(socketNewMessage(message))
@@ -95,7 +96,7 @@ const Chat = () => {
     
     const logout = () => {
         window.localStorage.removeItem("loggedinUser");
-        setUser(null)
+        user = null
     }
 
     const chat = () => {
