@@ -21,6 +21,8 @@ const Chat = ({ logout }) => {
     const [curGroup, setCurGroup] = useState()
     const [msg, setMessage] = useState("")
     const [show, setShow] = useState(false)
+    const [show2, setShow2] = useState(false)
+    const [show3, setShow3] = useState(false)
     const [groupName, setGroupName] = useState('')
     const dispatch = useDispatch()
 
@@ -78,16 +80,33 @@ const Chat = ({ logout }) => {
     const handleClose = () => {
         setShow(false)
     }
+
+    const handleOpen = () => {
+        setShow(true)
+    }
+
+    const handleClose2 = () => {
+        setShow2(false)
+    }
+
+    const handleOpen2 = () => {
+        setShow2(true)
+    }
+
+    const handleClose3 = () => {
+        setShow3(false)
+    }
+
+    const handleOpen3 = () => {
+        setShow3(true)
+    }
     
-
-
         return (
             <div className="contianer">
                 <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
-                <LeaveGroup groups={userInfo} leaveGroup={handleLeave} />
-                <JoinGroup allGroups={allGroups} userGroups={userInfo} handleJoin={handleJoin}  />
-                <IoIosAddCircleOutline onClick={() => setShow(!show)}/>
-                <GroupPanel username={user} groups={userInfo} handleCreate={handleCreate} handleJoin={handleJoin} handleLeave={handleLeave} getGroupMessages={getGroupMessages}/>
+                <LeaveGroup  show={show3} handleClose={handleClose3} groups={userInfo} leaveGroup={handleLeave} />
+                <JoinGroup allGroups={allGroups} userGroups={userInfo} handleClose={handleClose2} show={show2} handleJoin={handleJoin}/>
+                <GroupPanel username={user} groups={userInfo} getGroupMessages={getGroupMessages} handleOpen={handleOpen} handleOpen2={handleOpen2} handleOpen3={handleOpen3}/>
                 <div className="right">
                   <Message messages={messages} />
                   <form className="input-from" onClick={handleSubmit}>
