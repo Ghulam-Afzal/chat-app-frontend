@@ -3,7 +3,6 @@ import { AiOutlineClose } from "react-icons/ai";
 const CreateGroupModel = ({ show, handleClose, groupName, setGroupName, handleCreate}) => {
     const showHideClassName = show ?  "modal display-block" : "modal display-none";
 
-    console.log(show)
     return (
         <div className={showHideClassName}>
             <section  className="modal-main">

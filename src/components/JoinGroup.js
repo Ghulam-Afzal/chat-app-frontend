@@ -3,13 +3,11 @@ import { AiOutlineClose } from "react-icons/ai";
 const JoinGroup = ({ show, handleClose, allGroups, userGroups, handleJoin }) => {
     const showHideClassName = show ?  "modal display-block" : "modal display-none";
 
-    console.log(userGroups)
     const temp = allGroups.filter((group) => !userGroups.find(({ groupId }) => group.groupId === groupId))
     return (
         <div className={showHideClassName}>
             <section  className="modal-main">
             <AiOutlineClose className="close-btn" onClick={handleClose}/>
-                {console.log(temp)}
                 {temp.map((group) => {
                     return (
                     <li key={group.id}>

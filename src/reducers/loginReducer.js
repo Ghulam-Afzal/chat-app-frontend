@@ -1,7 +1,6 @@
 
 
 const loginReducer = (state = false, action) => {
-    console.log(state)
     switch(action.type){
         case "USER_SIGNEDIN":
             return !state
