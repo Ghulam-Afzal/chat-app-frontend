@@ -146,6 +146,10 @@ fieldset {
   cursor: pointer;
 }
 
+.temp {
+  width: 80%;
+  height: 80%;
+}
 @media screen and (min-width: 734px){
   .home-btn-container{
     flex-direction: row;
