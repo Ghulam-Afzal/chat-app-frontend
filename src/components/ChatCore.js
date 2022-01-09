@@ -2,19 +2,18 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { initializeUser, createGroup, joinGroup, leaveGroup } from "../reducers/authReducer"
 import { initializeMessages, newMessage, socketNewMessage } from "../reducers/messageReducer"
+import { IoIosAddCircleOutline } from "react-icons/io";
+import CreateGroupModel from "./CreateGroupModel"
+import { initializeGroups } from "../reducers/groupReducer"
 import { socket } from "../service/socket"
-import "../App.css"
 import Message from "./Messages"
 import GroupPanel from "./GroupPanel"
 import JoinGroup from "./JoinGroup"
 import LeaveGroup from "./LeaveGroup"
-import { IoIosAddCircleOutline } from "react-icons/io";
-import CreateGroupModel from "./CreateGroupModel"
-import { initializeGroups } from "../reducers/groupReducer"
-import { handleLoginState } from "../reducers/loginReducer"
+import "../App.css"
 
 
-const Chat = () => {
+const Chat = ({ logout }) => {
     const messages = useSelector(state => state.messages)
     const userInfo = useSelector(state => state.user)
     const allGroups = useSelector(state => state.groups)
