@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { initializeUser, createGroup, joinGroup, leaveGroup } from "../reducers/authReducer"
 import { initializeMessages, newMessage, socketNewMessage } from "../reducers/messageReducer"
-import { IoIosAddCircleOutline } from "react-icons/io";
 import CreateGroupModel from "./CreateGroupModel"
 import { initializeGroups } from "../reducers/groupReducer"
 import { socket } from "../service/socket"
