@@ -1,6 +1,6 @@
 
 
-const GroupPanel = ({ username, groups, handleCreate, handleJoin, handleLeave, getGroupMessages}) => {
+const GroupPanel = ({ username, groups, getGroupMessages, handleOpen, handleOpen2, handleOpen3 }) => {
     return (
         <div className="left">
             <h1>User: {username}</h1>
@@ -14,11 +14,11 @@ const GroupPanel = ({ username, groups, handleCreate, handleJoin, handleLeave, g
                     )
                 })}
             </ul>
-            <button onClick={handleCreate}>Create Group</button>
-            <button onClick={handleJoin}>Join Group</button>
-            <button onClick={handleLeave}>Leave Group</button>
+            <button onClick={handleOpen}>Create Group</button>
+            <button onClick={handleOpen2}>Join Group</button>
+            <button onClick={handleOpen3}>Leave Group</button>
           </div>
-    )
+    )   
 }
 
 export default GroupPanel
