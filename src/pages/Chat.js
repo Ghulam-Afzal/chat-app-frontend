@@ -18,7 +18,7 @@ const Temp = () => {
                     <Link to="/signin">
                         <button className='home-btn'>Login</button>
                     </Link>
-                    <Link to="/Home">
+                    <Link to="/">
                         <button className='home-btn'>Home</button>
                     </Link>
                 </div>                       
