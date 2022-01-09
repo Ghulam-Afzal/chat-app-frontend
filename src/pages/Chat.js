@@ -1,11 +1,18 @@
-import { useSelector, useDispatch } from "react-redux"
 import Chat from "../components/ChatCore"
-import { handleLoginState } from "../reducers/loginReducer"
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 
-const Temp = () => {
-    const userLoggedIn = useSelector(state => state.loggedIn)
-    const dispatch = useDispatch()
+const ChatMain = () => {
+    const [userLoggedIn, setUserLoggedIn] = useState(null)
+
+    useEffect (() => {
+        const data = window.localStorage.getItem("loggedinUser")
+        if (data){
+            const user = JSON.parse(data)
+            setUserLoggedIn(user)
+        }
+    }, [])
+
 
     const noUserScreen = () => {
         return (
@@ -28,14 +35,14 @@ const Temp = () => {
 
     const logout = () => {
         window.localStorage.removeItem("loggedinUser");
-        dispatch(handleLoginState())
+        setUserLoggedIn(null)
     }
 
     return (
         <div>
-            {userLoggedIn === false ? noUserScreen() : <Chat logout={logout}></Chat>}
+            {userLoggedIn === null ? noUserScreen() : <Chat logout={logout}></Chat>}
         </div>
     )
 }
 
-export default Temp 
+export default ChatMain
