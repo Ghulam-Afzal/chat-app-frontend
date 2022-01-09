@@ -4,12 +4,12 @@ import { initializeUser, createGroup, joinGroup, leaveGroup } from "../reducers/
 import { initializeMessages, newMessage, socketNewMessage } from "../reducers/messageReducer"
 import { socket } from "../service/socket"
 import "../App.css"
-import Message from "../components/Messages"
-import GroupPanel from "../components/GroupPanel"
-import JoinGroup from "../components/JoinGroup"
-import LeaveGroup from "../components/LeaveGroup"
+import Message from "./Messages"
+import GroupPanel from "./GroupPanel"
+import JoinGroup from "./JoinGroup"
+import LeaveGroup from "./LeaveGroup"
 import { IoIosAddCircleOutline } from "react-icons/io";
-import CreateGroupModel from "../components/CreateGroupModel"
+import CreateGroupModel from "./CreateGroupModel"
 import { initializeGroups } from "../reducers/groupReducer"
 import { handleLoginState } from "../reducers/loginReducer"
 
@@ -33,7 +33,7 @@ const Chat = () => {
         user = (loggedInUser.username)
         userId = loggedInUser.id
     }
-    
+
     socket.off('s-message').on("s-message", (message) => {
         if (message.groupId === curGroup){
             dispatch(socketNewMessage(message))
@@ -79,18 +79,9 @@ const Chat = () => {
     const handleClose = () => {
         setShow(false)
     }
-    const noUserScreen = () => {
-        return (
-            <div>No User Signed In</div>
-        )
-    }
     
-    const logout = () => {
-        window.localStorage.removeItem("loggedinUser");
-        dispatch(handleLoginState())
-    }
 
-    const chat = () => {
+
         return (
             <div className="contianer">
                 <CreateGroupModel handleClose={handleClose} handleCreate={handleCreate} show={show} groupName={groupName} setGroupName={setGroupName}/>
@@ -108,13 +99,7 @@ const Chat = () => {
               </div>
             </div>
           )
-    }
 
-    return (
-        <div>
-            {userLoggedIn === false ? noUserScreen() : chat()}
-        </div>
-    )
 }
 
 export default Chat
