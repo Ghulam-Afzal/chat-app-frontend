@@ -1,14 +1,11 @@
 import React, { useState } from "react"
 import authService from '../service/auth'
 import { Redirect } from "react-router-dom"
-import { handleLoginState } from "../reducers/loginReducer"
-import { useDispatch } from "react-redux"
 
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false);
-    const dispatch = useDispatch()
 
     const login = async (event) => {
         event.preventDefault()
@@ -20,7 +17,6 @@ const Login = () => {
             }
             const user = await authService.login(obj)
             window.localStorage.setItem("loggedinUser", JSON.stringify(user))
-            dispatch(handleLoginState())
             setRedirect(true)
         } catch (error){
             console.log(error)
