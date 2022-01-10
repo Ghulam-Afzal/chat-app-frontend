@@ -1,6 +1,5 @@
 import axios from 'axios'
 import messagesService from '../service/message'
-import config from '../service/service.config'
 import { socket } from '../service/socket'
 
 const taskReducer = (state = [], action) => {
@@ -23,11 +22,11 @@ export const newMessage = (author, message, group) => {
         groupId: group 
     }
     return async dispatch => {
-        const message = await axios.post(config.new_mes_url, payload)
-        socket.emit("message-send", message.data)
+        const message = await messagesService.newMessage(payload)
+        socket.emit("message-send", message)
         dispatch({
             type: "NEW_MESSAGE",
-            data: message.data
+            data: message
         })
     }
 }
