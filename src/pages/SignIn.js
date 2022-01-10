@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import authService from '../service/auth'
 import { Redirect } from "react-router-dom"
+import { setToken1 } from "../service/auth"
+import { setToken2 } from "../service/groups"
+import { setToken3 } from "../service/message"
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -19,6 +22,9 @@ const Login = () => {
             window.localStorage.setItem("loggedinUser", JSON.stringify(user))
             setUsername('')
             setPassword('')
+            setToken1(user.tokenizeUser)
+            setToken2(user.tokenizeUser)
+            setToken3(user.tokenizeUser)
             setRedirect(true)
         } catch (error){
             console.log(error)

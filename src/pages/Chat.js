@@ -1,6 +1,9 @@
 import Chat from "../components/ChatCore"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { setToken1 } from "../service/auth"
+import { setToken2 } from "../service/groups"
+import { setToken3 } from "../service/message"
 
 const ChatMain = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(null)
@@ -10,6 +13,9 @@ const ChatMain = () => {
         if (data){
             const user = JSON.parse(data)
             setUserLoggedIn(user)
+            setToken1(user.tokenizeUser)
+            setToken2(user.tokenizeUser)
+            setToken3(user.tokenizeUser)
         }
     }, [])
 
@@ -36,6 +42,9 @@ const ChatMain = () => {
     const logout = () => {
         window.localStorage.removeItem("loggedinUser");
         setUserLoggedIn(null)
+        setToken1(null)
+        setToken2(null)
+        setToken3(null)
     }
 
     return (
