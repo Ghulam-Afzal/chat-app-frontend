@@ -8,8 +8,9 @@ const CreateGroupModel = ({ show, handleClose, groupName, setGroupName, handleCr
             <section  className="modal-main">
                 <AiOutlineClose className="close-btn" onClick={handleClose}/>
                 <form onSubmit={handleCreate}> 
-                    Group Name: <input value={groupName} onChange={(e) => setGroupName(e.target.value)}/>
-                    <button type="submit" onClick={handleClose}>Submit</button>
+                <p>Group Name:</p>
+                    <input className="form-input" value={groupName} onChange={(e) => setGroupName(e.target.value)}/>
+                    <button className="form-submit" type="submit" onClick={handleClose}>Submit</button>
                 </form>
             </section>
         </div>

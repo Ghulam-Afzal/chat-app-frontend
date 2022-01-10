@@ -4,15 +4,19 @@ const LeaveGroup = ({ show, handleClose, groups, leaveGroup }) => {
     const showHideClassName = show ?  "modal display-block" : "modal display-none";
     return (
         <div className={showHideClassName}>
-            <section  className="modal-main">
+            <section  className="list-model">
             <AiOutlineClose className="close-btn" onClick={handleClose}/>
-                {groups.map((group) => {
-                    return (
-                        <li key={group.groupId}>
-                            <button onClick={() => leaveGroup(group.groupId)}>{group.name}</button>
-                        </li>
-                    )
-                })}
+            <h3>Groups Leavable</h3>
+                <ul>
+                    {groups.map((group) => {
+                        return (
+                            <li className="group-item" key={group.groupId}>
+                                <p>{group.name}</p>
+                                <button onClick={() => leaveGroup(group.groupId)}>Leave</button>
+                            </li>
+                        )
+                    })}
+                </ul>
             </section>
         </div>
     )

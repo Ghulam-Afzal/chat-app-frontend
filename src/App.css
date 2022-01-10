@@ -2,6 +2,10 @@ button {
   cursor: pointer;
 }
 
+ul {
+  list-style: none;
+}
+
 .contianer {
   display: flex;
   height: 100vh;
@@ -123,12 +127,16 @@ fieldset {
 .modal-main {
   position: fixed;
   background: white;
-  max-width: 968px;
+  max-width: 250px;
   width: 90%;
-  height: auto;
+  height: 250px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .display-block {
@@ -146,10 +154,56 @@ fieldset {
   cursor: pointer;
 }
 
-.temp {
+.list-model {
+  position: fixed;
+  background: white;
   width: 80%;
   height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  overflow: auto; 
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
+
+.list-model h3 {
+  text-align: center;
+}
+
+.group-item {
+  width: 60vw;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: #4361ee;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.group-item button, p{
+  margin: 0px 10px 0px 10px
+}
+
+.group-item button {
+  margin: 5px;
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+}
+
+.group-item button:hover {
+  background-color: #6f79a8;
+  opacity: 40%;
+  border: solid 1px black;
+}
+
 @media screen and (min-width: 734px){
   .home-btn-container{
     flex-direction: row;
