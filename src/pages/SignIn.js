@@ -17,12 +17,12 @@ const Login = () => {
             }
             const user = await authService.login(obj)
             window.localStorage.setItem("loggedinUser", JSON.stringify(user))
+            setUsername('')
+            setPassword('')
             setRedirect(true)
         } catch (error){
             console.log(error)
         }
-        setUsername('')
-        setPassword('')
     }
 
     const form = () => {
