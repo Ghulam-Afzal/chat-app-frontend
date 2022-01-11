@@ -16,7 +16,6 @@ const Chat = ({ logout }) => {
     const messages = useSelector(state => state.messages)
     const userInfo = useSelector(state => state.user)
     const allGroups = useSelector(state => state.groups)
-    const userLoggedIn = useSelector(state => state.loggedIn)
     const [curGroup, setCurGroup] = useState()
     const [msg, setMessage] = useState("")
     const [show, setShow] = useState(false)
