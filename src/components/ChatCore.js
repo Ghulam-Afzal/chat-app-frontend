@@ -105,14 +105,21 @@ const Chat = ({ logout }) => {
                 <LeaveGroup  show={show3} handleClose={handleClose3} groups={userInfo} leaveGroup={handleLeave} />
                 <JoinGroup allGroups={allGroups} userGroups={userInfo} handleClose={handleClose2} show={show2} handleJoin={handleJoin}/>
                 <GroupPanel username={user} groups={userInfo} getGroupMessages={getGroupMessages} handleOpen={handleOpen} handleOpen2={handleOpen2} handleOpen3={handleOpen3}/>
-                <div className="right">
-                  <Message messages={messages} />
-                  <form className="input-from" onClick={handleSubmit}>
-                      <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
-                      <button type="submit">Send</button>
-                  </form>
-                  <button onClick={logout}>Logout</button>
-              </div>
+                
+                <div className="wrapper"> 
+                    <div className="right">
+                        <div>
+                            <Message messages={messages} />
+                        </div>
+                    </div>
+                    <div className="from-container">
+                        <form className="input-from" onClick={handleSubmit}>
+                            <input name="msg" type="text" value={msg} onChange={(e) => setMessage(e.target.value)}></input>
+                            <button type="submit">Send</button>
+                            <button onClick={logout}>Logout</button>
+                        </form>
+                </div>
+                </div>
             </div>
           )
 

@@ -21,11 +21,11 @@ const Message = ({ messages }) => {
     }
     else {
         return (
-            <div className="messages">
+            <div className="messages-cont">
                 {messages.map((message) => {
                     return (
                         // {message.user.username}
-                    <li key={message.id}> {message.user.username} : {message.message}</li>
+                    <li className="messages" key={message.id}> {message.user.username} : {message.message}</li>
                     )})}
                     <div ref={messagesRef}/>
             </div>
