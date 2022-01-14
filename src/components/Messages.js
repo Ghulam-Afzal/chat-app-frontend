@@ -25,7 +25,7 @@ const Message = ({ messages }) => {
                 {messages.map((message) => {
                     return (
                         // {message.user.username}
-                    <li className="messages" key={message.id}> {message.user.username} : {message.message}</li>
+                    <p className="messages" key={message.id}> {message.user.username} : {message.message}</p>
                     )})}
                     <div ref={messagesRef}/>
             </div>

@@ -29,8 +29,11 @@ ul {
 }
 
 .messages {
-  height: 95%;
-  overflow: auto;
+  width: 90%;
+  height: 30px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 5px;
 }
 
 .from-contianer {
