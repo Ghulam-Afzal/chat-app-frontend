@@ -68,7 +68,7 @@ const Chat = ({ logout }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
             if(curGroup){
-                if (msg.length !== 0){
+                if (msg.length !== 0 && msg.length <= 255){
                     dispatch(newMessage(userId, msg, curGroup))
                     setMessage("")
                 }
