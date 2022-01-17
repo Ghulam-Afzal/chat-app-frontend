@@ -7,6 +7,7 @@ import { setToken3 } from "../service/message"
 
 const ChatMain = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(null)
+    let interval; 
 
     useEffect (() => {
         const data = window.localStorage.getItem("loggedinUser")
@@ -19,7 +20,17 @@ const ChatMain = () => {
         }
     }, [])
 
-
+    useEffect(() => {
+        interval = setInterval(() => {
+            const data = localStorage.getItem("timeUserSignedIn")
+            const time = JSON.parse(data)
+            const curTime = new Date().getTime()
+            if (curTime >= time){
+                logout()
+                clearInterval(interval)
+            }
+        }, 1000)
+    }, [])
     const noUserScreen = () => {
         return (
             <div className='home-main-container'>
@@ -40,7 +51,8 @@ const ChatMain = () => {
     }
 
     const logout = () => {
-        window.localStorage.removeItem("loggedinUser");
+        window.localStorage.removeItem("loggedinUser")
+        window.localStorage.removeItem("timeUserSignedIn")
         setUserLoggedIn(null)
         setToken1(null)
         setToken2(null)

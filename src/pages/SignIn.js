@@ -20,6 +20,8 @@ const Login = () => {
             }
             const user = await authService.login(obj)
             window.localStorage.setItem("loggedinUser", JSON.stringify(user))
+            const curTime = new Date().getTime() + (1 * 3600 * 1000)
+            window.localStorage.setItem("timeUserSignedIn", JSON.stringify(curTime))
             setUsername('')
             setPassword('')
             setToken1(user.tokenizeUser)
