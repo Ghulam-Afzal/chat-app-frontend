@@ -61,7 +61,7 @@ const SignUp = () => {
       )
     }
 
-    return  <div>{redirect === false ? form() : <Redirect to="/" />}</div>;
+    return  <div>{redirect === false ? form() : <Redirect to="/signin" />}</div>;
 }
 
 export default SignUp

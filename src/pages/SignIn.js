@@ -48,7 +48,7 @@ const Login = () => {
         )
     }
 
-    return <div>{redirect === false ? form() : <Redirect to="/" />}</div>;
+    return <div>{redirect === false ? form() : <Redirect to="/chat" />}</div>;
  
 }
 
