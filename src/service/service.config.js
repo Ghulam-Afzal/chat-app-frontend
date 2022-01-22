@@ -11,7 +11,7 @@ const config = {
 }
 
 
-// meant for when the react front end is buit and used in the backend asn on app
+// meant for when the react front end is built and used in the backend as on app
 // const config = {
 //     user_url: '/api/auth/getUser',
 //     mes_url: '/api/messages/getMessages',
